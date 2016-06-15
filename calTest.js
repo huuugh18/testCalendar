@@ -11,6 +11,7 @@ $(document).ready(function() {
     let cardioA1 = new Workout('cardioA1', 'Cardio', 'https://www.youtube.com/watch?v=iTLtv0hoSHU', 'cardio')
     //-----------------Workout Array Input----------------------
     let workoutA1 = [ubfA1,lbsA1,restA1]
+    let workoutA2 = [ubfA1,lbsA1,restA1,cardioA1]
     //--------------------Workout Constructor-------------------
     function Workout(id, title, url, className)     {
         this.id = id
@@ -90,20 +91,7 @@ $(document).ready(function() {
         return scheduleArr
 
     }
-    // get events array with all data from large program object
-    function getEvents(program){
-        let eventArr = []
-        for (let i=0; i < program.schedule.length; i++) {
-            eventArr.push({
-                id: program.schedule[i].workout.id,
-                title: program.schedule[i].workout.title,
-                start: program.schedule[i].date,
-                url: program.schedule[i].workout.url,
-                className: program.schedule[i].workout.class,
-            })
-        }
-
-    }
+   
     // -----------------------------------------------------------------
     //------------------ FULL CALENDAR OPTIONS--------------------------
     //------------------------------------------------------------------
