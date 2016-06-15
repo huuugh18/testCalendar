@@ -1,25 +1,17 @@
 $(document).ready(function() {
-    let startDate = '2016-06-21'
+    // -----------------Start Date -----------------------------
+    let startDateInput = '2016-06-21'
     let startArr = []
-    
-    dateCalc(startDate);
 
-    
-    // object constructors
-    function ProgramObj(id, title, url, className) {
-        this.id = id
-        this.title = title
-        this.url = url
-        this.className = className
-        // this.eventSched = assignDates()
-
-    }
-    function ScheduleObj(day1, day2, day3) {
-        this.day1 = day1
-        this.day2 = day2
-        this.day3 = day3
-        
-    }
+    // -----------------Workout Objects-------------------------
+    // -----------------A1 Workout Objs-------------------------
+    let ubfA1 = new Workout('ubfA1', 'Upper Body Flexibility', 'https://www.youtube.com/watch?v=Ozd_56IHdfM', 'flex')
+    let lbsA1 = new Workout('lbsA1', 'Lower Body Strength', 'https://www.youtube.com/watch?v=MYNWjf0qjxE', 'lift')
+    let restA1 = new Workout('restA1', 'Rest Day', 'https://www.youtube.com/watch?v=qrx1vyvtRLY', 'rest')
+    let cardioA1 = new Workout('cardioA1', 'Cardio', 'https://www.youtube.com/watch?v=iTLtv0hoSHU', 'cardio')
+    //-----------------Workout Array Input----------------------
+    let workoutA1 = [ubfA1,lbsA1,restA1]
+    //--------------------Workout Constructor-------------------
     function Workout(id, title, url, className)     {
         this.id = id
         this.title = title
@@ -29,7 +21,24 @@ $(document).ready(function() {
         this.txtColor = getTxt(className)
 
     }
-    // get background color for class
+    //---------------Program Objects----------------------------
+    let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
+    console.log(programA1)
+    //--------------Program Constructor-------------------------
+    function ProgramObj(id, title, url, className, startDate, workoutSched) {
+        this.id = id
+        this.title = title
+        this.url = url
+        this.className = className
+        this.start = startDate
+        this.workoutSched = workoutSched
+        this.eventPush = assignDates(workoutSched,dateCalc(startDate))
+        // this.eventSched = assignDates()
+
+    }
+    
+    
+    // get background color and text color for class
     function getBG(className){
         switch(className){
             case 'rest': return '#83CDE6'
@@ -39,7 +48,6 @@ $(document).ready(function() {
 
         }
     }
-    // get text color for class
     function getTxt(className){
         switch(className){
             case 'rest': return '#1c2833'
@@ -49,17 +57,6 @@ $(document).ready(function() {
 
         }
     }
-    
-    // created objects
-    let ubfA1 = new Workout('ubfA1', 'Upper Body Flexibility', 'https://www.youtube.com/watch?v=Ozd_56IHdfM', 'flex')
-    let lbsA1 = new Workout('lbsA1', 'Lower Body Strength', 'https://www.youtube.com/watch?v=MYNWjf0qjxE', 'lift')
-    let restA1 = new Workout('restA1', 'Rest Day', 'https://www.youtube.com/watch?v=qrx1vyvtRLY', 'rest')
-    let cardioA1 = new Workout('cardioA1', 'Cardio', 'https://www.youtube.com/watch?v=iTLtv0hoSHU', 'cardio')
-    let schedA1 = new ScheduleObj(ubfA1, lbsA1, restA1)
-    let programA1 = new ProgramObj('pA1', 'Program A1', '#', 'hypertension', schedA1)
-    
-    
-    
     //create dates from starting date input
     function dateCalc(startDate) {
         let startDateSplit = startDate.split('-')
@@ -77,10 +74,7 @@ $(document).ready(function() {
     }
 
     //---get dates into schedule
-    //-----test vars--------------
-    let testWorkout = [ubfA1,lbsA1,restA1]
-    let testSchedule = dateCalc(startDate)
-    assignDates(testWorkout,testSchedule)
+    
 
     function assignDates(workoutArr, dateArr) {
         let scheduleArr = []
@@ -93,7 +87,6 @@ $(document).ready(function() {
                 textColor: workoutArr[i].txtColor
             })
         }
-        console.log(scheduleArr)
         return scheduleArr
 
     }
@@ -111,8 +104,9 @@ $(document).ready(function() {
         }
 
     }
-    
-    // full calendar options and methods ect.
+    // -----------------------------------------------------------------
+    //------------------ FULL CALENDAR OPTIONS--------------------------
+    //------------------------------------------------------------------
     $('#calendar').fullCalendar({
         weekends: true,
         dayClick: function() {
@@ -126,7 +120,7 @@ $(document).ready(function() {
             prevYear: 'seek-prev',
             nextYear: 'seek-next'
         },
-        events: assignDates(testWorkout,testSchedule),
+        events: programA1.eventPush,
         //    [
         //     {
         //         id: 'rest',
