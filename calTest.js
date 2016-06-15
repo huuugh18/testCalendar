@@ -3,8 +3,7 @@ $(document).ready(function() {
     let startArr = []
     
     dateCalc(startDate);
-    console.log(startArr)
-    console.log('test this is different')
+
     
     // object constructors
     function ProgramObj(id, title, url, className) {
@@ -58,7 +57,7 @@ $(document).ready(function() {
     let cardioA1 = new Workout('cardioA1', 'Cardio', 'https://www.youtube.com/watch?v=iTLtv0hoSHU', 'cardio')
     let schedA1 = new ScheduleObj(ubfA1, lbsA1, restA1)
     let programA1 = new ProgramObj('pA1', 'Program A1', '#', 'hypertension', schedA1)
-    console.log(ubfA1)
+    
     
     
     //create dates from starting date input
@@ -152,8 +151,6 @@ $(document).ready(function() {
                 return
             }
         }
-
-    
     })
     // custom button example
     $('#my-next-button').click(function(){ $('#calendar').fullCalendar('today')})
