@@ -24,7 +24,9 @@ $(document).ready(function() {
     }
     //---------------Program Objects----------------------------
     let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
+    let programA2 = new ProgramObj('pA2', 'Hypertension A2', '#', 'hypertension', startDateInput, workoutA2 )
     console.log(programA1)
+    console.log(programA2)
     //--------------Program Constructor-------------------------
     function ProgramObj(id, title, url, className, startDate, workoutSched) {
         this.id = id
@@ -33,7 +35,8 @@ $(document).ready(function() {
         this.className = className
         this.start = startDate
         this.workoutSched = workoutSched
-        this.eventPush = assignDates(workoutSched,dateCalc(startDate))
+        this.length = workoutSched.length
+        this.eventPush = assignDates(workoutSched,dateCalc(startDate,workoutSched.length))
         // this.eventSched = assignDates()
 
     }
@@ -59,13 +62,12 @@ $(document).ready(function() {
         }
     }
     //create dates from starting date input
-    function dateCalc(startDate) {
+    function dateCalc(startDate,length) {
         let startDateSplit = startDate.split('-')
         for (let i=0; i < startDateSplit.length; i++){
             startDateSplit[i] = Number(startDateSplit[i])
         }
-        let dayMath = []
-        for (let j=0; j < 3; j++ ) {
+        for (let j=0; j < length; j++ ) {
             let d = startDateSplit[2] + j
             let m = startDateSplit[1]
             let y = startDateSplit[0] 
@@ -108,7 +110,7 @@ $(document).ready(function() {
             prevYear: 'seek-prev',
             nextYear: 'seek-next'
         },
-        events: programA1.eventPush,
+        events: programA2.eventPush,
         //    [
         //     {
         //         id: 'rest',
