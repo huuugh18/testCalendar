@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // -----------------Start Date -----------------------------
-    let startDateInput = '2016-06-21'
+    let startDateInput = '2016-06-10'
     let startArr = []
 
     // -----------------Workout Objects-------------------------
@@ -72,8 +72,10 @@ $(document).ready(function() {
             let m = startDateSplit[1]
             let y = startDateSplit[0] 
             startArr[j] = y.toString() + '-' + m.toString() + '-' + d.toString() 
+            startArr[j] = getMoment(startArr[j])
         }
         return startArr
+        
     }
 
     //---get dates into schedule
@@ -110,18 +112,30 @@ $(document).ready(function() {
             prevYear: 'seek-prev',
             nextYear: 'seek-next'
         },
-        events: programA2.eventPush,
+        events: 
+                programA1.eventPush,
         //    [
-        //     {
+        //      {
         //         id: 'rest',
         //         title: 'Rest Day',
-        //         start: '2016-06-10',
+        //         start: moment('2016-6-8','YYYY-M MM-D DD'),
         //         url: '#',
         //         className: 'restClass',
         //         backgroundColor: '#00ffcc',
         //         textColor: 'blue',
-        //     }
-
+        //         allDay: true
+        //     },
+        //     {
+        //         id: 'rest',
+        //         title: 'Rest Day',
+        //         start: '2016-06-13',
+        //         url: '#',
+        //         className: 'restClass',
+        //         backgroundColor: '#00ffcc',                
+        //         textColor: 'blue',
+                
+        //     } ,
+           
         // ],
         
         header: {
@@ -142,5 +156,10 @@ $(document).ready(function() {
     let heights = $('.clndrWell').map(function(){return $(this).height()}).get(),
     maxHeight = Math.max.apply(null, heights)
     $('.clndrWell').height(maxHeight)
+
+    function getMoment(time) {
+        return moment(time,'YYYY-M-D').format('YYYY-MM-DD')
+    }
+    getMoment('2016-6-9')
     
 }); 
