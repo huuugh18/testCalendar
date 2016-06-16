@@ -3,7 +3,8 @@ $(document).ready(function() {
     let startDateInput = moment('2016-06-29','YYYY-MM-DD')
     console.log(startDateInput)
     let startArr = []
-
+    //-----------------Current Date for Well-------------------
+    clickDate(moment())
     // -----------------Workout Objects-------------------------
     // -----------------A1 Workout Objs-------------------------
     let ubfA1 = new Workout('ubfA1', 'Upper Body Flexibility', 'https://www.youtube.com/watch?v=Ozd_56IHdfM', 'flex')
@@ -97,8 +98,9 @@ $(document).ready(function() {
     //------------------------------------------------------------------
     $('#calendar').fullCalendar({
         weekends: true,
-        dayClick: function() {
-            alert('happy clicking')
+        dayClick: function(date) {
+            clickDate(date)
+            	
         },
         allDayDefault: true,
         theme: true ,
@@ -109,7 +111,7 @@ $(document).ready(function() {
             nextYear: 'seek-next'
         },
         events: 
-                programA1.eventPush,
+                programA2.eventPush,
        
         
         header: {
@@ -138,6 +140,10 @@ $(document).ready(function() {
         return moment(date).add(length,'days')
     }
     
-    
+    function clickDate(date) {
+        let newDate = moment(date,'YYYY-MM-DD').format('MMMM D')
+        console.log(newDate)
+        $('h2.dateTitle').html(newDate)
+    }
     
 }); 
