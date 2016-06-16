@@ -1,6 +1,7 @@
 $(document).ready(function() {
     // -----------------Start Date -----------------------------
-    let startDateInput = '2016-06-10'
+    let startDateInput = moment('2016-06-29','YYYY-MM-DD')
+    console.log(startDateInput)
     let startArr = []
 
     // -----------------Workout Objects-------------------------
@@ -63,18 +64,13 @@ $(document).ready(function() {
     }
     //create dates from starting date input
     function dateCalc(startDate,length) {
-        let startDateSplit = startDate.split('-')
-        for (let i=0; i < startDateSplit.length; i++){
-            startDateSplit[i] = Number(startDateSplit[i])
+        for (let j=0; j < length; j++) {
+            startArr[j] = addDays(startDate,j)
+            
         }
-        for (let j=0; j < length; j++ ) {
-            let d = startDateSplit[2] + j
-            let m = startDateSplit[1]
-            let y = startDateSplit[0] 
-            startArr[j] = y.toString() + '-' + m.toString() + '-' + d.toString() 
-            startArr[j] = getMoment(startArr[j])
-        }
+        console.log(startArr)
         return startArr
+        
         
     }
 
@@ -114,29 +110,7 @@ $(document).ready(function() {
         },
         events: 
                 programA1.eventPush,
-        //    [
-        //      {
-        //         id: 'rest',
-        //         title: 'Rest Day',
-        //         start: moment('2016-6-8','YYYY-M MM-D DD'),
-        //         url: '#',
-        //         className: 'restClass',
-        //         backgroundColor: '#00ffcc',
-        //         textColor: 'blue',
-        //         allDay: true
-        //     },
-        //     {
-        //         id: 'rest',
-        //         title: 'Rest Day',
-        //         start: '2016-06-13',
-        //         url: '#',
-        //         className: 'restClass',
-        //         backgroundColor: '#00ffcc',                
-        //         textColor: 'blue',
-                
-        //     } ,
-           
-        // ],
+       
         
         header: {
             left: 'prev',
@@ -156,10 +130,14 @@ $(document).ready(function() {
     let heights = $('.clndrWell').map(function(){return $(this).height()}).get(),
     maxHeight = Math.max.apply(null, heights)
     $('.clndrWell').height(maxHeight)
-
+    // change date format so single digit days and months have a 0 in front
     function getMoment(time) {
         return moment(time,'YYYY-M-D').format('YYYY-MM-DD')
     }
-    getMoment('2016-6-9')
+    function addDays(date,length){
+        return moment(date).add(length,'days')
+    }
+    
+    
     
 }); 
