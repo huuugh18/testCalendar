@@ -51,7 +51,6 @@ $(document).ready(function() {
             case 'cardio': return '#E8002B'
             case 'lift': return '#FAAC2F'
             case 'flex': return '#19BD04'
-
         }
     }
     function getTxt(className){
@@ -60,24 +59,16 @@ $(document).ready(function() {
             case 'cardio': return '#FEFEFE'
             case 'lift': return '#05182a'
             case 'flex': return '#32050e'
-
         }
     }
     //create dates from starting date input
     function dateCalc(startDate,length) {
         for (let j=0; j < length; j++) {
             startArr[j] = addDays(startDate,j)
-            
         }
-        console.log(startArr)
         return startArr
-        
-        
     }
-
     //---get dates into schedule
-    
-
     function assignDates(workoutArr, dateArr) {
         let scheduleArr = []
         for (let i = 0; i <workoutArr.length; i++ ) {
@@ -90,9 +81,7 @@ $(document).ready(function() {
             })
         }
         return scheduleArr
-
     }
-   
     // -----------------------------------------------------------------
     //------------------ FULL CALENDAR OPTIONS--------------------------
     //------------------------------------------------------------------
@@ -142,8 +131,8 @@ $(document).ready(function() {
     
     function clickDate(date) {
         let newDate = moment(date,'YYYY-MM-DD').format('MMMM D')
-        console.log(newDate)
         $('h2.dateTitle').html(newDate)
+        
     }
     
 }); 
