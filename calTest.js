@@ -39,7 +39,7 @@ $(document).ready(function() {
         this.workoutSched = workoutSched
         this.length = workoutSched.length
         this.eventPush = assignDates(workoutSched,dateCalc(startDate,workoutSched.length))
-        // this.eventSched = assignDates()
+        
 
     }
     
@@ -134,5 +134,20 @@ $(document).ready(function() {
         $('h2.dateTitle').html(newDate)
         
     }
+    // function findTitle(title) {
+    //     return title.title === 'Lower Body Strength'
+    // }
+    // console.log(programA1.eventPush.find(findTitle))
+    let compareDate = '2016-06-30'
+    function findDate(clickDate) {
+        
+        let clickFormat = moment(clickDate.start._d).format('YYYY-MM-DD')
+        return clickFormat === compareDate
+    }
     
+    function getCurrentW() {
+        console.log(programA1.eventPush.find(findDate).title)
+        return(programA1.eventPush.find(findDate)).title
+    }
+    getCurrentW()
 }); 
