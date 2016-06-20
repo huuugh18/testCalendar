@@ -8,9 +8,9 @@ $(document).ready(function() {
     // -----------------Workout Objects-------------------------
     // -----------------A1 Workout Objs-------------------------
     let ubfA1 = new Workout('ubfA1', 'Upper Flex', 'https://www.youtube.com/watch?v=Ozd_56IHdfM', 'flex', 'Upper Body Flexibility A1', ['Lower Back Mobility','Biceps Stretch', 'Pec Stretch'])
-    let lbsA1 = new Workout('lbsA1', 'Lower Strength', 'https://www.youtube.com/watch?v=MYNWjf0qjxE', 'lift', 'Lower Body Strength A1', ['body weight squats', 'alternating lunges', 'swiss ball hamstring pulls'])
+    let lbsA1 = new Workout('lbsA1', 'Lower Strength', 'https://www.youtube.com/watch?v=MYNWjf0qjxE', 'lift', 'Lower Body Strength A1', ['Body Weight Squats', 'Alternating Lunges', 'Swiss Ball Hamstring Curls'])
     let restA1 = new Workout('restA1', 'Rest Day', 'https://www.youtube.com/watch?v=qrx1vyvtRLY', 'rest', 'Rest Day', ['Enjoy your rest day'])
-    let cardioA1 = new Workout('cardioA1', 'Cardio', 'https://www.youtube.com/watch?v=iTLtv0hoSHU', 'cardio', 'Cardio Workout', ['biking', 'jogging', 'swimming'])
+    let cardioA1 = new Workout('cardioA1', 'Cardio', 'https://www.youtube.com/watch?v=iTLtv0hoSHU', 'cardio', 'Cardio Workout', ['Biking', 'Jogging', 'Swimming'])
     //-----------------Workout Array Input----------------------
     let workoutA1 = [ubfA1,lbsA1,restA1]
     let workoutA2 = [ubfA1,lbsA1,restA1,cardioA1]
@@ -152,9 +152,9 @@ $(document).ready(function() {
             for (let i=0; i < dayEvents[0].list.length; i++) {
                 $('#workoutList').append(
                 $('<a/>')
-                    .addClass('list-group-item')
+                    .addClass('list-group-item list-group-item-success')
                     .prop('href', '#')
-                    .html('<div class=\'c1\'><h4>' + dayEvents[0].list[i] + '</h4>')
+                    .html('<div class=\'c1\'><h5>' + dayEvents[0].list[i] + '</h5>')
                     
                 )
             }
@@ -169,9 +169,9 @@ $(document).ready(function() {
             for (let i=0; i <event.list.length; i++) {
                 $('#workoutList').append(
                 $('<a/>')
-                    .addClass('list-group-item')
+                    .addClass('list-group-item list-group-item-success')
                     .prop('href', '#')
-                    .html('<div class=\'c1\'><h4>' + event.list[i] + '</h4>')
+                    .html('<div class=\'c1\'><h5>' + event.list[i] + '</h5>')
                     
                 )
             }

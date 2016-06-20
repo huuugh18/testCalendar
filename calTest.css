@@ -1,5 +1,6 @@
 h2.dateTitle {
-    margin: 0px
+    margin: 0px;
+    margin-bottom: 14px;
 }
 #exWell {
     margin-left: 10px
@@ -11,8 +12,18 @@ h2.dateTitle {
 .ubf {
     background-color: green
 }
-#wokroutListWell{
-    margin: 14px;
+#workoutListWell{
+    margin-top: 0px;
+    margin-bottom: 14px;
     text-align:center;
-    padding: 10px;
+    padding-bottom: 10px; padding-top: 0px; padding-left: 0px; padding-right: 0px;
+
+    border: 0px;
+}
+h3.workoutTitle{
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+#workoutList{
+    text-align: left;
 }
