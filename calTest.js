@@ -77,7 +77,7 @@ $(document).ready(function() {
             scheduleArr.push({
                 title:workoutArr[i].title,
                 start:dateArr[i],
-                url:workoutArr[i].url,
+                // url:workoutArr[i].url,
                 backgroundColor:workoutArr[i].BGColor,
                 textColor: workoutArr[i].txtColor,
                 descrip: workoutArr[i].descrip,
@@ -99,8 +99,10 @@ $(document).ready(function() {
                 
             })
             pushWorkout(dayEvents)
-            
-            	
+        },
+        eventClick: function(event) {
+            clickEvent(event)
+            pushWorkoutEvent(event)
         },
         allDayDefault: true,
         theme: true ,
@@ -110,20 +112,11 @@ $(document).ready(function() {
             prevYear: 'seek-prev',
             nextYear: 'seek-next'
         },
-        events: 
-                programA2.eventPush,
-       
-        
+        events: programA2.eventPush,
         header: {
             left: 'prev',
             center: 'title',
             right: 'next'
-        },
-        eventClick: function(event) {
-            if (event.url) {
-                window.open(event.url,'_blank');
-                return false;
-            }
         }
     })
     // custom button example
@@ -140,33 +133,22 @@ $(document).ready(function() {
         return moment(date).add(length,'days')
     }
     // click function for calendar well dates 
+    function clickEvent(date) {
+        let newDate = moment(date.start,'YYYY-MM-DD').format('MMMM D')
+        $('h2.dateTitle').html(newDate)
+    }
     function clickDate(date) {
         let newDate = moment(date,'YYYY-MM-DD').format('MMMM D')
         $('h2.dateTitle').html(newDate)
        
         
     }
-    // function findTitle(title) {
-    //     return title.title === 'Lower Body Strength'
-    // }
-    // console.log(programA1.eventPush.find(findTitle))
-    let compareDate = '2016-06-30'
-    // compare date function for find
-    function findDate(clickDate) {
-        
-        let clickFormat = moment(clickDate.start._d).format('YYYY-MM-DD')
-        return clickFormat === compareDate
-    }
-    // get workout title from object with the findDate function based on date chosen
-    function getCurrentW() {
-        let clientEventsArr = $('#calendar').fullCalendar('clientEvents')
-        console.log(clientEventsArr.find(findDate).title)
-        return(programA1.eventPush.find(findDate)).title
-    }
-    getCurrentW()
+    
     function pushWorkout(dayEvents) {
+        $('#workoutList').empty()
+        $('h3.workoutTitle').html('No Workout Today')
+        if (dayEvents[0].descrip !== undefined) {
             $('h3.workoutTitle').html(dayEvents[0].descrip)
-            $('#workoutList').empty()
             for (let i=0; i < dayEvents[0].list.length; i++) {
                 $('#workoutList').append(
                 $('<a/>')
@@ -176,6 +158,24 @@ $(document).ready(function() {
                     
                 )
             }
-            
         }
+        
+    }
+    function pushWorkoutEvent(event) {
+        $('#workoutList').empty()
+        $('h3.workoutTitle').html('No Workout Today')
+        if (event !== undefined) {
+            $('h3.workoutTitle').html(event.descrip)
+            for (let i=0; i <event.list.length; i++) {
+                $('#workoutList').append(
+                $('<a/>')
+                    .addClass('list-group-item')
+                    .prop('href', '#')
+                    .html('<div class=\'c1\'><h4>' + event.list[i] + '</h4>')
+                    
+                )
+            }
+        }
+        
+    }
 }); 
