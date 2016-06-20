@@ -98,7 +98,6 @@ $(document).ready(function() {
                 return moment(event.start).isSame(date)
                 
             })
-            console.log(dayEvents[0])
             pushWorkout(dayEvents)
             
             	
@@ -120,10 +119,10 @@ $(document).ready(function() {
             center: 'title',
             right: 'next'
         },
-        eventClick: function(calEvent) {
+        eventClick: function(event) {
             if (event.url) {
                 window.open(event.url,'_blank');
-                return
+                return false;
             }
         }
     })
