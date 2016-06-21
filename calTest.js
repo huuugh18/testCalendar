@@ -1,9 +1,9 @@
 $(document).ready(function() {
     // -----------------Start Date -----------------------------
-    let startDateInput = moment('2016-06-29','YYYY-MM-DD')
+    let startDateInput = moment('2016-06-20','YYYY-MM-DD')
     console.log(startDateInput)
     let startArr = []
-    //-----------------Current Date for Well-------------------
+    //-----------------Present Date and Workout for Well-------------------
     clickDate(moment())
     // -----------------Workout Objects-------------------------
     // -----------------A1 Workout Objs-------------------------
@@ -94,11 +94,8 @@ $(document).ready(function() {
         weekends: true,
         dayClick: function(date) {
             clickDate(date)
-            var dayEvents = $('#calendar').fullCalendar('clientEvents', function(event) {
-                return moment(event.start).isSame(date)
-                
-            })
-            pushWorkout(dayEvents)
+            pushWorkout(date)
+            $(this).css('background', '#ffe45c url("images/ui-bg_highlight-soft_75_ffe45c_1x100.png") 50% top repeat-x;');
         },
         eventClick: function(event) {
             clickEvent(event)
@@ -143,8 +140,17 @@ $(document).ready(function() {
        
         
     }
-    
-    function pushWorkout(dayEvents) {
+    function presentPushWorkout() {
+        let presentDay = moment()
+        clickDate(presentDay)
+
+
+
+    }
+    function pushWorkout(date) {
+        let dayEvents = $('#calendar').fullCalendar('clientEvents', function(event) {
+                return moment(event.start).isSame(date)
+            })
         $('#workoutList').empty()
         $('h3.workoutTitle').html('No Workout Today')
         if (dayEvents[0].descrip !== undefined) {
