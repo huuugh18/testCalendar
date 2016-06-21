@@ -56,6 +56,10 @@ $(document).ready(function() {
             case 'flex': return '#32050e'
         }
     }
+    $(function() {
+        $('#datepicker').datepicker();
+    })
+
     //create dates from starting date input
     function dateCalc(startDate,length) {
         for (let j=0; j < length; j++) {
