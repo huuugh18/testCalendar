@@ -56,10 +56,29 @@ $(document).ready(function() {
             case 'flex': return '#32050e'
         }
     }
-    $(function() {
-        $('#datepicker').datepicker();
-    })
+    //-------------------------------------------------------------------
+    //----------------------jQuery Date Picker---------------------------
+    //-------------------------------------------------------------------
 
+    $(function() {
+        $('#datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            // altFormat: 'yy-mm-dd',
+            changeMonth: false,
+            // onSelect: getSelectedDate()
+            onSelect: function(dateText, inst) { 
+                let dateAsString = dateText; //the first parameter of this function
+                let dateAsObject = $(this).datepicker( 'getDate' ); //the getDate method
+                console.log(dateAsString)
+                console.log(dateAsObject)
+            }
+        })
+    })
+        function getSelectedDate() {
+            let selectDate = $('#datepicker').datepicker('getDate')
+        console.log(selectDate)
+        }
+    
     //create dates from starting date input
     function dateCalc(startDate,length) {
         for (let j=0; j < length; j++) {
