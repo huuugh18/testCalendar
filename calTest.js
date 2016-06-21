@@ -1,10 +1,7 @@
 $(document).ready(function() {
     // -----------------Start Date -----------------------------
     let startDateInput = moment('2016-06-20','YYYY-MM-DD')
-    console.log(startDateInput)
     let startArr = []
-    //-----------------Present Date and Workout for Well-------------------
-    clickDate(moment())
     // -----------------Workout Objects-------------------------
     // -----------------A1 Workout Objs-------------------------
     let ubfA1 = new Workout('ubfA1', 'Upper Flex', 'https://www.youtube.com/watch?v=Ozd_56IHdfM', 'flex', 'Upper Body Flexibility A1', ['Lower Back Mobility','Biceps Stretch', 'Pec Stretch'])
@@ -29,8 +26,6 @@ $(document).ready(function() {
     //---------------Program Objects----------------------------
     let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
     let programA2 = new ProgramObj('pA2', 'Hypertension A2', '#', 'hypertension', startDateInput, workoutA2 )
-    console.log(programA1)
-    console.log(programA2)
     //--------------Program Constructor-------------------------
     function ProgramObj(id, title, url, className, startDate, workoutSched) {
         this.id = id
@@ -44,8 +39,6 @@ $(document).ready(function() {
         
 
     }
-    
-    
     // get background color and text color for class
     function getBG(className){
         switch(className){
@@ -93,8 +86,11 @@ $(document).ready(function() {
     $('#calendar').fullCalendar({
         weekends: true,
         dayClick: function(date) {
+            // get date header
             clickDate(date)
+            // get workout data
             pushWorkout(date)
+            // attempt to change bg color of cell clicked
             $(this).css('background', '#ffe45c url("images/ui-bg_highlight-soft_75_ffe45c_1x100.png") 50% top repeat-x;');
         },
         eventClick: function(event) {
@@ -116,6 +112,8 @@ $(document).ready(function() {
             right: 'next'
         }
     })
+    // set today date and workout in event well on page load    
+    presentPushWorkout()
     // custom button example
     $('#my-next-button').click(function(){ $('#calendar').fullCalendar('today')})
     // match heights of calendar and event well
@@ -141,15 +139,12 @@ $(document).ready(function() {
         
     }
     function presentPushWorkout() {
-        let presentDay = moment()
-        clickDate(presentDay)
-
-
-
+        clickDate(moment())
+        pushWorkout(moment())
     }
     function pushWorkout(date) {
         let dayEvents = $('#calendar').fullCalendar('clientEvents', function(event) {
-                return moment(event.start).isSame(date)
+                return moment(event.start).isSame(date, 'day')
             })
         $('#workoutList').empty()
         $('h3.workoutTitle').html('No Workout Today')
