@@ -1,9 +1,21 @@
 $(document).ready(function() {
+    
+    // match heights of calendar and event well
+    let heights = $('.clndrWell').map(function(){return $(this).height()}).get(),
+    maxHeight = Math.max.apply(null, heights)
+    $('.clndrWell').height(maxHeight)
+
     // -----------------Start Date -----------------------------
     // let startDateInput = moment('2016-06-20','YYYY-MM-DD')
     let startArr = []
     let startDateInput = ''
-    // -----------------Workout Objects-------------------------
+
+    // --------------------Submit Button------------------------
+    $('#submitDateButton').click(function() {
+        let dateAsObject = $('#datepicker').datepicker( 'getDate' )
+        console.log(dateAsObject)
+    })
+
     // -----------------A1 Workout Objs-------------------------
     let ubfA1 = new Workout('ubfA1', 'Upper Flex', 'https://www.youtube.com/watch?v=Ozd_56IHdfM', 'flex', 'Upper Body Flexibility A1', ['Lower Back Mobility','Biceps Stretch', 'Pec Stretch'])
     let lbsA1 = new Workout('lbsA1', 'Lower Strength', 'https://www.youtube.com/watch?v=MYNWjf0qjxE', 'lift', 'Lower Body Strength A1', ['Body Weight Squats', 'Alternating Lunges', 'Swiss Ball Hamstring Curls'])
@@ -69,15 +81,15 @@ $(document).ready(function() {
             // onSelect: getSelectedDate()
             onSelect: function(dateText, inst) { 
                 let dateAsString = dateText; //the first parameter of this function
-                let dateAsObject = $(this).datepicker( 'getDate' ); //the getDate method
-                console.log(dateAsString)
-                console.log(dateAsObject)
+                // let dateAsObject = $(this).datepicker( 'getDate' ); //the getDate method
+                // console.log(dateAsString)
+                // console.log(dateAsObject)
             }
         })
     })
         function getSelectedDate() {
             let selectDate = $('#datepicker').datepicker('getDate')
-            startDateInput = $('#datepicker').datepicker('getDate')
+            // startDateInput = $('#datepicker').datepicker('getDate')
             console.log(selectDate)
         }
     
@@ -138,13 +150,10 @@ $(document).ready(function() {
         }
     })
     // set today date and workout in event well on page load    
-    presentPushWorkout()
+    // presentPushWorkout()
     // custom button example
     $('#my-next-button').click(function(){ $('#calendar').fullCalendar('today')})
-    // match heights of calendar and event well
-    let heights = $('.clndrWell').map(function(){return $(this).height()}).get(),
-    maxHeight = Math.max.apply(null, heights)
-    $('.clndrWell').height(maxHeight)
+    
     // change date format so single digit days and months have a 0 in front
     function getMoment(time) {
         return moment(time,'YYYY-M-D').format('YYYY-MM-DD')
