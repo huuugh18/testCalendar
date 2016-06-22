@@ -1,7 +1,8 @@
 $(document).ready(function() {
     // -----------------Start Date -----------------------------
-    let startDateInput = moment('2016-06-20','YYYY-MM-DD')
+    // let startDateInput = moment('2016-06-20','YYYY-MM-DD')
     let startArr = []
+    let startDateInput = ''
     // -----------------Workout Objects-------------------------
     // -----------------A1 Workout Objs-------------------------
     let ubfA1 = new Workout('ubfA1', 'Upper Flex', 'https://www.youtube.com/watch?v=Ozd_56IHdfM', 'flex', 'Upper Body Flexibility A1', ['Lower Back Mobility','Biceps Stretch', 'Pec Stretch'])
@@ -76,7 +77,8 @@ $(document).ready(function() {
     })
         function getSelectedDate() {
             let selectDate = $('#datepicker').datepicker('getDate')
-        console.log(selectDate)
+            startDateInput = $('#datepicker').datepicker('getDate')
+            console.log(selectDate)
         }
     
     //create dates from starting date input
