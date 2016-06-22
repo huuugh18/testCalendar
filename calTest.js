@@ -12,21 +12,21 @@ $(document).ready(function() {
 
     // --------------------Submit Button------------------------
     $('#submitDateButton').click(function() {
-        startDateInput = $('#datepicker').datepicker( 'getDate' )
+        let startDateInput = $('#datepicker').datepicker( 'getDate' )
+        startDateInput = moment(startDateInput)
+        console.log(moment.isMoment(startDateInput))
+        // $('#calendar').fullCalendar( 'renderEvent', newEvent , 'stick')
+
         let workoutA1 = [ubfA1,lbsA1,restA1]
         let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
-        $('#calendar').fullCalendar({
-            events: [{
-                        title  : 'event1',
-                        start  : '2010-01-01'
-                    },
-                    {
-                        title  : 'event2',
-                        start  : '2010-01-05',
-                        end    : '2010-01-07'
-                    }]
-        })
+        console.log(programA1.eventPush)
+        for (let i=0; i<programA1.eventPush.length; i++) {
+            $('#calendar').fullCalendar('renderEvent', programA1.eventPush[i], 'stick')
+        }
+        
+        
     })
+    
 
     // -----------------A1 Workout Objs-------------------------
     let ubfA1 = new Workout('ubfA1', 'Upper Flex', 'https://www.youtube.com/watch?v=Ozd_56IHdfM', 'flex', 'Upper Body Flexibility A1', ['Lower Back Mobility','Biceps Stretch', 'Pec Stretch'])
@@ -123,6 +123,7 @@ $(document).ready(function() {
     //------------------------------------------------------------------
     $('#calendar').fullCalendar({
         weekends: true,
+        editable: true,
         dayClick: function(date) {
             // get date header
             clickDate(date)
@@ -141,7 +142,7 @@ $(document).ready(function() {
             prevYear: 'seek-prev',
             nextYear: 'seek-next'
         },
-        events: programA1.eventPush,
+        events: '',
         header: {
             left: 'prev',
             center: 'title',
