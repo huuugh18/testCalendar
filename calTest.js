@@ -1,9 +1,9 @@
 $(document).ready(function() {
     
     // match heights of calendar and event well
-    let heights = $('.clndrWell').map(function(){return $(this).height()}).get(),
+    let heights = $('#calWell').map(function(){return $(this).height()}).get(),
     maxHeight = Math.max.apply(null, heights)
-    $('.clndrWell').height(maxHeight)
+    $('#exWell').height(maxHeight)
 
     // -----------------Start Date -----------------------------
     // let startDateInput = moment('2016-06-20','YYYY-MM-DD')

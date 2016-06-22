@@ -3,10 +3,20 @@ h2.dateTitle {
     margin-bottom: 14px;
 }
 #exWell {
-    margin-left: 10px
+    margin-left: 0px;
+    border-left: 0px;
+}
+#calendar{
+    border-right: 0px;
 }
 .clndrWell {
-    margin-top: 20px
+    margin-top: 20px;
+}
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .ubf {
