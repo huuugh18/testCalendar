@@ -1,31 +1,29 @@
 $(document).ready(function() {
-    
-    // match heights of calendar and event well
-    let heights = $('#calWell').map(function(){return $(this).height()}).get(),
-    maxHeight = Math.max.apply(null, heights)
-    $('#exWell').height(maxHeight)
-
     // -----------------Start Date -----------------------------
-    // let startDateInput = moment('2016-06-20','YYYY-MM-DD')
     let startArr = []
-    // let startDateInput = ''
-
+    // -----------set current date on load----------------------
+    clickDate(moment())
     // --------------------Submit Button------------------------
     $('#submitDateButton').click(function() {
+        // get date inupt from datepicker
         let startDateInput = $('#datepicker').datepicker( 'getDate' )
         startDateInput = moment(startDateInput)
-        console.log(moment.isMoment(startDateInput))
-        // $('#calendar').fullCalendar( 'renderEvent', newEvent , 'stick')
-
-        let workoutA1 = [ubfA1,lbsA1,restA1]
+        // get program from select form
+        let selectedProg = document.getElementById('selProgForm').value
+        console.log(selectedProg)
+        // construct program objects
         let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
-        console.log(programA1.eventPush)
+        let programA2 = new ProgramObj('pA2', 'Hypertension A2', '#', 'hypertension', startDateInput, workoutA2 )
+        // put program objects into array
+        let dataArr = [programA1, programA2]
+        // get program object from the form value containing program id 
+        let foundProg = getByValue2(dataArr, selectedProg)
+        // clear calendar of events
         $('#calendar').fullCalendar('removeEvents')
-        for (let i=0; i<programA1.eventPush.length; i++) {
-            $('#calendar').fullCalendar('renderEvent', programA1.eventPush[i], 'stick')
+        // iterate through workout array in program to add events to calendar
+        for (let i=0; i<foundProg.eventPush.length; i++) {
+            $('#calendar').fullCalendar('renderEvent', foundProg.eventPush[i], 'stick')
         }
-        
-        
     })
     
 
@@ -34,10 +32,14 @@ $(document).ready(function() {
     let lbsA1 = new Workout('lbsA1', 'Lower Strength', 'https://www.youtube.com/watch?v=MYNWjf0qjxE', 'lift', 'Lower Body Strength A1', ['Body Weight Squats', 'Alternating Lunges', 'Swiss Ball Hamstring Curls'])
     let restA1 = new Workout('restA1', 'Rest Day', 'https://www.youtube.com/watch?v=qrx1vyvtRLY', 'rest', 'Rest Day', ['Enjoy your rest day'])
     let cardioA1 = new Workout('cardioA1', 'Cardio', 'https://www.youtube.com/watch?v=iTLtv0hoSHU', 'cardio', 'Cardio Workout', ['Biking', 'Jogging', 'Swimming'])
+
     //-----------------Workout Array Input----------------------
-    // let workoutA1 = [ubfA1,lbsA1,restA1]
+    let workoutA1 = [ubfA1,lbsA1,restA1]
     let workoutA2 = [ubfA1,lbsA1,restA1,cardioA1]
-    //--------------------Workout Constructor-------------------
+    //-------------------------------------------------------------------
+    //-----------------------CONSTRUCTORS--------------------------------
+    //-------------------------------------------------------------------
+    //--------------------WORKOUT CONSTRUCTORS---------------------------
     function Workout(id, title, url, className, descrip, list)     {
         this.id = id
         this.title = title
@@ -49,10 +51,8 @@ $(document).ready(function() {
         this.txtColor = getTxt(className)
 
     }
-    //---------------Program Objects----------------------------
-    // let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
-    // let programA2 = new ProgramObj('pA2', 'Hypertension A2', '#', 'hypertension', startDateInput, workoutA2 )
-    //--------------Program Constructor-------------------------
+       
+    //--------------PROGRAM CONSTRUCTOR-------------------------
     function ProgramObj(id, title, url, className, startDate, workoutSched) {
         this.id = id
         this.title = title
@@ -65,7 +65,7 @@ $(document).ready(function() {
         
 
     }
-    // get background color and text color for class
+    // GET BACKGROUND COLOR FOR CLASS
     function getBG(className){
         switch(className){
             case 'rest': return '#83CDE6'
@@ -74,6 +74,7 @@ $(document).ready(function() {
             case 'flex': return '#19BD04'
         }
     }
+    // GET TEXT COLOR FOR CLASS
     function getTxt(className){
         switch(className){
             case 'rest': return '#1c2833'
@@ -83,26 +84,25 @@ $(document).ready(function() {
         }
     }
     //-------------------------------------------------------------------
-    //----------------------jQuery Date Picker---------------------------
+    //----------------------JQUERY DATE PICKER---------------------------
     //-------------------------------------------------------------------
 
     $(function() {
         $('#datepicker').datepicker({
             dateFormat: 'yy-mm-dd',
-            // altFormat: 'yy-mm-dd',
             changeMonth: false,
        
         })
     })
         
-    //create dates from starting date input
+    //CREATE DATES FROM STARTING DATE INPUT
     function dateCalc(startDate,length) {
         for (let j=0; j < length; j++) {
             startArr[j] = addDays(startDate,j)
         }
         return startArr
     }
-    //---get dates into schedule
+    //GET DATES INTO SCHEDULE
     function assignDates(workoutArr, dateArr) {
         let scheduleArr = []
         for (let i = 0; i <workoutArr.length; i++ ) {
@@ -126,17 +126,21 @@ $(document).ready(function() {
         weekends: true,
         editable: true,
         dayClick: function(date) {
-            // get date header
+            // PUSH DATE HEADER
             clickDate(date)
-            // get workout data
+            // PUSH WORKOUT DATA
             pushWorkout(date)
         },
+        // CLICK ON EVENT AND PUSH DATA TO EVENT WELL
         eventClick: function(event) {
+            // PUSH DATE HEADER
             clickEvent(event)
+            // PUSH WORKOUT DATA
             pushWorkoutEvent(event)
         },
         allDayDefault: true,
         theme: true ,
+        // BUTTON ICONS 
         themeButtonIcons: {
             prev:'circle-triangle-w',
             next:'circle-triangle-e',
@@ -144,6 +148,7 @@ $(document).ready(function() {
             nextYear: 'seek-next'
         },
         events: '',
+        // NAVIGATION BUTTONS IN HEADER
         header: {
             left: 'prev',
             center: 'title',
@@ -151,18 +156,19 @@ $(document).ready(function() {
         }
     })
     // set today date and workout in event well on page load    
-    // presentPushWorkout()
-    // custom button example
-    $('#my-next-button').click(function(){ $('#calendar').fullCalendar('today')})
     
-    // change date format so single digit days and months have a 0 in front
+    // custom button example
+    // $('#my-next-button').click(function(){ $('#calendar').fullCalendar('today')})
+    
+    // CHANGE DATE FORMAT FROM SINGLE DIGIT TO DOUBLE DIGIT DAYS AND MONTHS
     function getMoment(time) {
         return moment(time,'YYYY-M-D').format('YYYY-MM-DD')
     }
+    // FOR dateCalc FUNCTION TO ADD DAYS TO STARTING DATE
     function addDays(date,length){
         return moment(date).add(length,'days')
     }
-    // click function for calendar well dates 
+    // PUSH DATE SELECTED TO EXWELL ON CLICK OF DAY AND EVENT 
     function clickEvent(date) {
         let newDate = moment(date.start,'YYYY-MM-DD').format('MMMM D')
         $('h2.dateTitle').html(newDate)
@@ -170,13 +176,13 @@ $(document).ready(function() {
     function clickDate(date) {
         let newDate = moment(date,'YYYY-MM-DD').format('MMMM D')
         $('h2.dateTitle').html(newDate)
-       
-        
     }
+    // TODAYS WORKOUT AND DATE PUSH TO EXWELL
     function presentPushWorkout() {
         clickDate(moment())
         pushWorkout(moment())
     }
+    // PUSH WORKOUT CONTAINED IN DATE AND EVENT TO EXWELL
     function pushWorkout(date) {
         let dayEvents = $('#calendar').fullCalendar('clientEvents', function(event) {
                 return moment(event.start).isSame(date, 'day')
@@ -214,4 +220,11 @@ $(document).ready(function() {
         }
         
     }
+    // FIND SELECTED PROGRAM IN DATA ARRAY CONTAINING ALL PROGRAMS
+    function getByValue2(arr, value) {
+        var result  = arr.filter(function(o){return o.id == value;} );
+        return result? result[0] : null; // or undefined
+    }
+    
+
 }); 
