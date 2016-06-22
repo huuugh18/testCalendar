@@ -20,6 +20,7 @@ $(document).ready(function() {
         let workoutA1 = [ubfA1,lbsA1,restA1]
         let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
         console.log(programA1.eventPush)
+        $('#calendar').fullCalendar('removeEvents')
         for (let i=0; i<programA1.eventPush.length; i++) {
             $('#calendar').fullCalendar('renderEvent', programA1.eventPush[i], 'stick')
         }
