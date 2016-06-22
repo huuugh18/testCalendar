@@ -8,12 +8,24 @@ $(document).ready(function() {
     // -----------------Start Date -----------------------------
     // let startDateInput = moment('2016-06-20','YYYY-MM-DD')
     let startArr = []
-    let startDateInput = ''
+    // let startDateInput = ''
 
     // --------------------Submit Button------------------------
     $('#submitDateButton').click(function() {
-        let dateAsObject = $('#datepicker').datepicker( 'getDate' )
-        console.log(dateAsObject)
+        startDateInput = $('#datepicker').datepicker( 'getDate' )
+        let workoutA1 = [ubfA1,lbsA1,restA1]
+        let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
+        $('#calendar').fullCalendar({
+            events: [{
+                        title  : 'event1',
+                        start  : '2010-01-01'
+                    },
+                    {
+                        title  : 'event2',
+                        start  : '2010-01-05',
+                        end    : '2010-01-07'
+                    }]
+        })
     })
 
     // -----------------A1 Workout Objs-------------------------
@@ -22,7 +34,7 @@ $(document).ready(function() {
     let restA1 = new Workout('restA1', 'Rest Day', 'https://www.youtube.com/watch?v=qrx1vyvtRLY', 'rest', 'Rest Day', ['Enjoy your rest day'])
     let cardioA1 = new Workout('cardioA1', 'Cardio', 'https://www.youtube.com/watch?v=iTLtv0hoSHU', 'cardio', 'Cardio Workout', ['Biking', 'Jogging', 'Swimming'])
     //-----------------Workout Array Input----------------------
-    let workoutA1 = [ubfA1,lbsA1,restA1]
+    // let workoutA1 = [ubfA1,lbsA1,restA1]
     let workoutA2 = [ubfA1,lbsA1,restA1,cardioA1]
     //--------------------Workout Constructor-------------------
     function Workout(id, title, url, className, descrip, list)     {
@@ -37,8 +49,8 @@ $(document).ready(function() {
 
     }
     //---------------Program Objects----------------------------
-    let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
-    let programA2 = new ProgramObj('pA2', 'Hypertension A2', '#', 'hypertension', startDateInput, workoutA2 )
+    // let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
+    // let programA2 = new ProgramObj('pA2', 'Hypertension A2', '#', 'hypertension', startDateInput, workoutA2 )
     //--------------Program Constructor-------------------------
     function ProgramObj(id, title, url, className, startDate, workoutSched) {
         this.id = id
@@ -78,21 +90,10 @@ $(document).ready(function() {
             dateFormat: 'yy-mm-dd',
             // altFormat: 'yy-mm-dd',
             changeMonth: false,
-            // onSelect: getSelectedDate()
-            onSelect: function(dateText, inst) { 
-                let dateAsString = dateText; //the first parameter of this function
-                // let dateAsObject = $(this).datepicker( 'getDate' ); //the getDate method
-                // console.log(dateAsString)
-                // console.log(dateAsObject)
-            }
+       
         })
     })
-        function getSelectedDate() {
-            let selectDate = $('#datepicker').datepicker('getDate')
-            // startDateInput = $('#datepicker').datepicker('getDate')
-            console.log(selectDate)
-        }
-    
+        
     //create dates from starting date input
     function dateCalc(startDate,length) {
         for (let j=0; j < length; j++) {
@@ -127,8 +128,6 @@ $(document).ready(function() {
             clickDate(date)
             // get workout data
             pushWorkout(date)
-            // attempt to change bg color of cell clicked
-            $(this).css('background', '#ffe45c url("images/ui-bg_highlight-soft_75_ffe45c_1x100.png") 50% top repeat-x;');
         },
         eventClick: function(event) {
             clickEvent(event)
@@ -142,7 +141,7 @@ $(document).ready(function() {
             prevYear: 'seek-prev',
             nextYear: 'seek-next'
         },
-        events: programA2.eventPush,
+        events: programA1.eventPush,
         header: {
             left: 'prev',
             center: 'title',
