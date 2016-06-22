@@ -2,21 +2,38 @@ h2.dateTitle {
     margin: 0px;
     margin-bottom: 14px;
 }
+#inputForms {
+    border-right: 0px;
+    border-bottom: 0px;
+    border-bottom-right-radius: 0px;
+}
+#cornerWell {
+    border-left: 0px;
+    border-bottom: 0px;
+    border-bottom-left-radius: 0px;
+}
 #exWell {
     margin-left: 0px;
     border-left: 0px;
+    border-top: 0px;
+    border-top-left-radius: 0px;
 }
 #calendar{
     border-right: 0px;
+    border-top: 0px;
+    border-top-right-radius: 0px;
 }
-.clndrWell {
+
+.topWell {
     margin-top: 20px;
+    margin-bottom: 0px;
 }
 .row-eq-height {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  width:100%;
 }
 
 .ubf {

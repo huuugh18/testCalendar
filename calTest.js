@@ -10,7 +10,6 @@ $(document).ready(function() {
         startDateInput = moment(startDateInput)
         // get program from select form
         let selectedProg = document.getElementById('selProgForm').value
-        console.log(selectedProg)
         // construct program objects
         let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
         let programA2 = new ProgramObj('pA2', 'Hypertension A2', '#', 'hypertension', startDateInput, workoutA2 )
