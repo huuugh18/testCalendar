@@ -16,10 +16,8 @@
     <body>
         <div class='container'>
             <div class='row row-eq-height'>
-                <div class='col-md-1'>
-                </div>
-                <div id='inputForms' class='well col-md-7 topWell'>
-                    <p>Date: <input type ='text' class='form-control' id='datepicker'></p>
+                <div id='inputForms' class='well col-md-7 col-md-offset-1 topWell'>
+                    <input type ='text' class='form-control' id='datepicker' placeholder='Select Start Date'    >
                     <select class="form-control" id="selProgForm">
                         <option value='value'>Select Program</option>
                         <optgroup label='Hypertension A'>
@@ -27,17 +25,13 @@
                             <option value='pA2'>Program A2</option>
                         </optgroup>
                     </select> 
-                    <button type="button" id='submitDateButton' class="btn btn-primary">Submit</button>
+                    <button type="button" id='submitDateBtn' class="btn btn-primary">Submit</button>
                 </div>
                 <div class='col-md-3 well topWell' id='cornerWell'>
                 </div>
-                <div class='col-md-1'>
-                </div>
             </div>
             <div class='row row-eq-height'>
-                <div class='col-md-1'>
-                </div>
-                <div id='calendar' class='col-md-7 well clndrWell' id='calWell'>
+                <div id='calendar' class='col-md-7 col-md-offset-1 well clndrWell' id='calWell'>
                 </div>
                 <div class='col-md-3 well clndrWell' id='exWell'>
                     <div>
@@ -47,8 +41,6 @@
                         <h3 class='workoutTitle'></h3>
                         <div class='list-group' id='workoutList'>          </div>
                     </div>
-                </div>
-                <div class='col-md-1'>
                 </div>
             </div>
         </div>

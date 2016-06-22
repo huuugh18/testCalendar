@@ -4,7 +4,7 @@ $(document).ready(function() {
     // -----------set current date on load----------------------
     clickDate(moment())
     // --------------------Submit Button------------------------
-    $('#submitDateButton').click(function() {
+    $('#submitDateBtn').click(function() {
         // get date inupt from datepicker
         let startDateInput = $('#datepicker').datepicker( 'getDate' )
         startDateInput = moment(startDateInput)
@@ -90,6 +90,7 @@ $(document).ready(function() {
         $('#datepicker').datepicker({
             dateFormat: 'yy-mm-dd',
             changeMonth: false,
+            buttonText: 'Select Start Date'
        
         })
     })

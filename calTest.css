@@ -7,6 +7,18 @@ h2.dateTitle {
     border-bottom: 0px;
     border-bottom-right-radius: 0px;
 }
+#datepicker {
+    display: inline-block;
+    width: 35%;
+}
+#selProgForm {
+    display: inline-block;
+    width: 35%;
+}
+#submitDateDtn {
+    display: inline-block;
+    width: 15%
+}
 #cornerWell {
     border-left: 0px;
     border-bottom: 0px;
