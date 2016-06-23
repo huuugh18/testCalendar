@@ -14,9 +14,10 @@ $(document).ready(function() {
         let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
         let programA2 = new ProgramObj('pA2', 'Hypertension A2', '#', 'hypertension', startDateInput, workoutA2 )
         // put program objects into array
-        let dataArr = [programA1, programA2]
+        let progs = [programA1, programA2]
         // get program object from the form value containing program id 
-        let foundProg = getByValue2(dataArr, selectedProg)
+        // let foundProg = getByValue2(progs, selectedProg)
+        const foundProg = progs.find(prog => prog.id === selectedProg)
         // clear calendar of events
         $('#calendar').fullCalendar('removeEvents')
         // iterate through workout array in program to add events to calendar
