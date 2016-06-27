@@ -14,9 +14,8 @@ $(document).ready(()=> {
         let selectedProg = document.getElementById('selProgForm').value
         // construct program objects
         let programA1 = new ProgramObj('pA1', 'Hypertension A1', '#', 'hypertension', startDateInput, workoutA1 )
-        let programA2 = new ProgramObj('pA2', 'Hypertension A2', '#', 'hypertension', startDateInput, workoutA2 )
         // put program objects into array
-        let progs = [programA1, programA2]
+        let progs = [programA1]
         // get program object from the form value containing program id 
         // let foundProg = getByValue2(progs, selectedProg)
         const foundProg = progs.find(prog => prog.id === selectedProg)
@@ -29,17 +28,90 @@ $(document).ready(()=> {
         //     cal.fullCalendar('renderEvent', foundProg.eventPush[i], 'stick')
         // }
     })
+    //--------------------------Workout & Links to vids--------------------
+    function Exercise(title, url) {
+        this.title = title
+        this.url = url
+    }
+    // -----------------------A1 Exercice Objects -------------------------
+    // -----------------------Upper Flex Lower Strength --------------------------
+    const neckSixStretch = new Exercise('Six Direction Neck Stretch', 'https://youtu.be/RTQ-qgBvcQA')
+    const wristExtensorStretch = new Exercise('Wrist Extensor Stretch', 'https://youtu.be/i72ijRnySsQ')
+    const fingerWavesStretch = new Exercise('Finger Waves','https://youtu.be/NX2x3TAEszs')
+    const shoulderPendStretch = new Exercise('Shoulder Pendulum' , 'https://youtu.be/Wr--7ncxDvc')
+    const heelRaiseStrength = new Exercise('Heel Raises' , ' https://youtu.be/sBBBKKopNDg')
+    const arcQuadExtStrength = new Exercise('Short Arc Quads Extension', 'https://youtu.be/l5V84SOa7KM')
+    const strtLegRaiseStrength = new Exercise('Straight Leg Raise' , 'https://youtu.be/Seuapn_ZQnM')
+    const footShortStrength = new Exercise('Foot Shortening', 'https://youtu.be/mrBKuMMczR8')
+    const a1ufls = [neckSixStretch, wristExtensorStretch, fingerWavesStretch, shoulderPendStretch, heelRaiseStrength, arcQuadExtStrength, strtLegRaiseStrength, footShortStrength]
+    // -----------------------Upper Strength Lower Flex --------------------------
+    const gripStrength = new Exercise('Gripping Exercise', 'https://youtu.be/yyP9WDMDymM')
+    const kneePushupStrength = new Exercise('Knee Pushups', 'https://youtu.be/HrN4KrTz6P8')
+    const resistBiStrength = new Exercise('Resisted Biceps Curls', 'https://youtu.be/i63jFQUvyPY')
+    const resistWristFlexStrength = new Exercise('Resisited Wrist Flexion', 'https://youtu.be/sp-3E-pP87o')
+    const ankleRotFlex = new Exercise('Ankle Rotations', 'https://youtu.be/ib6mEkC7HQ4')
+    const tblHamFlex = new Exercise('Table Hamstring Stretch', 'https://youtu.be/ldUWWVzLo4U')
+    const assistGroinFlex = new Exercise('Assisted Groin Stretch', 'https://youtu.be/9tG8PfPjEVo')
+    const gluteFlex = new Exercise('Gluteal Stretch', 'https://youtu.be/XcJln-8Eed4')
+    const a1uslf = [gripStrength, kneePushupStrength, resistBiStrength,resistWristFlexStrength, ankleRotFlex, tblHamFlex, assistGroinFlex, gluteFlex]
+
+    // ----------------------Core ------------------------------
+    const catDogCore = new Exercise('Cat and Dog Stretch', 'https://youtu.be/9ZGoOTv3V3g')
+    const lowAbsCore = new Exercise('Lower Abs', 'https://youtu.be/JAST1CHOcss')
+    const stomHollowCore = new Exercise('Stomach Hollowing', 'https://youtu.be/LCq32AtcK6I')
+    const proneAbStretchCore = new Exercise('Prone Abdominal Stretch', 'https://youtu.be/CSkENbCF-wc')
+    const a1Core = [catDogCore, lowAbsCore, stomHollowCore, proneAbStretchCore]
+    
+    
+    //  --------------------Aerobic Exercise Objects -----------------------------
+    const aeroTreadmill = new Exercise('Treadmill Running', '#')
+    const aeroSwimming = new Exercise('Swimming', '#')
+    const aeroSkating = new Exercise('Skating', '#')
+    const aeroOther = new Exercise('Other', '#')
+    const a1Aerobic = [aeroTreadmill, aeroSwimming, aeroSkating, aeroOther]
+    // -------------------Rest Day-----------------------------
+    const restDay = new Exercise('Rest Day', '#')
     
 
+
+
+
     // -----------------A1 Workout Objs-------------------------
-    let ubfA1 = new Workout('ubfA1', 'Upper Flex', 'https://www.youtube.com/watch?v=Ozd_56IHdfM', 'flex', 'Upper Body Flexibility A1', ['Lower Back Mobility','Biceps Stretch', 'Pec Stretch'])
-    let lbsA1 = new Workout('lbsA1', 'Lower Strength', 'https://www.youtube.com/watch?v=MYNWjf0qjxE', 'lift', 'Lower Body Strength A1', ['Body Weight Squats', 'Alternating Lunges', 'Swiss Ball Hamstring Curls'])
-    let restA1 = new Workout('restA1', 'Rest Day', 'https://www.youtube.com/watch?v=qrx1vyvtRLY', 'rest', 'Rest Day', ['Enjoy your rest day'])
-    let cardioA1 = new Workout('cardioA1', 'Cardio', 'https://www.youtube.com/watch?v=iTLtv0hoSHU', 'cardio', 'Cardio Workout', ['Biking', 'Jogging', 'Swimming'])
+    let A1Day1 = new Workout('A1Day1', 'A1 Day 1', '#', 'lift', 'Strength and Flexibility', a1ufls)
+    let A1Day2 = new Workout('A1Day2', 'A1 Day 2', '#', 'cardio', 'Aerobic Exercise', a1Aerobic)
+    let A1Day3 = new Workout('A1Day3', 'A1 Day 3', '#', 'core', 'Core Abdominal Exercise', a1Core)
+    let A1Day4 = new Workout('A1Day4', 'A1 Day 4', '#', 'rest', 'Rest Day', restDay)
+    let A1Day5 = new Workout('A1Day5', 'A1 Day 5', '#', 'lift', 'Strength and Flexibility', a1uslf)
+    let A1Day6 = new Workout('A1Day6', 'A1 Day 6', '#', 'cardio', 'Aerobic Exercise', a1Aerobic)
+    let A1Day7 = new Workout('A1Day7', 'A1 Day 7', '#', 'rest' ,'Rest Day', restDay )
 
     //-----------------Workout Array Input----------------------
-    let workoutA1 = [ubfA1,lbsA1,restA1]
-    let workoutA2 = [ubfA1,lbsA1,restA1,cardioA1]
+     let workoutA1 = [A1Day1,A1Day2,A1Day3,A1Day4,A1Day5,A1Day6,A1Day7]
+
+
+     // ---------------Trying to get function to increase length of 
+     // ---------------weekly program to monthly but copying pushing elements of array into itself...------------
+    
+    
+    // function multipleWeeks(workout, weeks) {
+    //     let longWorkout = workout
+    //     for (let i=0; i < weeks; i++) {
+    //         for (let j=0; j <workout.length; j++) {
+    //             longWorkout.push(workout[j])
+    //         }
+    //     }
+    //     return longWorkout
+    // }
+    // function addWeeks (workout, workout2, weeks) {
+        
+    //     for (let i=0; i < weeks; i++) {
+    //         Array.prototype.push.apply(workout, workout2);
+    //         console.log(workout)
+    //     }
+    // }
+    // addWeeks(workoutA1, workoutA1, 4)
+    
+
     //-------------------------------------------------------------------
     //-----------------------CONSTRUCTORS--------------------------------
     //-------------------------------------------------------------------
@@ -201,8 +273,9 @@ $(document).ready(()=> {
                 $('#workoutList').append(
                 $('<a/>')
                     .addClass('list-group-item list-group-item-success')
-                    .prop('href', '#')
-                    .html('<div class=\'c1\'><h5>' + dayEvents[0].list[i] + '</h5>')
+                    .prop('target','_blank')
+                    .prop('href', dayEvents[0].list[i].url)
+                    .html('<div class=\'c1\'><h5>' + dayEvents[0].list[i].title + '</h5>')
                     
                 )
             }
@@ -219,8 +292,9 @@ $(document).ready(()=> {
                 $('#workoutList').append(
                 $('<a/>')
                     .addClass('list-group-item list-group-item-success')
-                    .prop('href', '#')
-                    .html('<div class=\'c1\'><h5>' + event.list[i] + '</h5>')
+                    .prop('target','_blank')
+                    .prop('href', event.list[i].url)
+                    .html('<div class=\'c1\'><h5>' + event.list[i].title + '</h5>')
                     
                 )
             }
