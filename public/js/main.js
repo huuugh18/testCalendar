@@ -1,6 +1,8 @@
-$(document).ready(function() {
+$(document).ready(()=> {
     // -----------------Start Date -----------------------------
     let startArr = []
+    //-----------------Mod-------------
+    MYMOD.hello()
     // -----------set current date on load----------------------
     clickDate(moment())
     // --------------------Submit Button------------------------
@@ -19,11 +21,13 @@ $(document).ready(function() {
         // let foundProg = getByValue2(progs, selectedProg)
         const foundProg = progs.find(prog => prog.id === selectedProg)
         // clear calendar of events
-        $('#calendar').fullCalendar('removeEvents')
+        const cal = $('#calendar')
+        cal.fullCalendar('removeEvents')
         // iterate through workout array in program to add events to calendar
-        for (let i=0; i<foundProg.eventPush.length; i++) {
-            $('#calendar').fullCalendar('renderEvent', foundProg.eventPush[i], 'stick')
-        }
+        foundProg.eventPush.forEach( prog =>  cal.fullCalendar('renderEvent', prog, 'stick'))
+        // for (let i=0; i<foundProg.eventPush.length; i++) {
+        //     cal.fullCalendar('renderEvent', foundProg.eventPush[i], 'stick')
+        // }
     })
     
 
@@ -190,7 +194,8 @@ $(document).ready(function() {
             })
         $('#workoutList').empty()
         $('h3.workoutTitle').html('No Workout Today')
-        if (dayEvents[0].descrip !== undefined) {
+        const nada = _.isEmpty(dayEvents)
+        if (!nada && dayEvents[0].descrip !== undefined) {
             $('h3.workoutTitle').html(dayEvents[0].descrip)
             for (let i=0; i < dayEvents[0].list.length; i++) {
                 $('#workoutList').append(
@@ -202,6 +207,7 @@ $(document).ready(function() {
                 )
             }
         }
+
         
     }
     function pushWorkoutEvent(event) {

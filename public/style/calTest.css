@@ -17,7 +17,9 @@ h2.dateTitle {
 }
 #submitDateDtn {
     display: inline-block;
-    width: 15%
+    width: 15%;
+    margin-left: 15px;
+
 }
 #cornerWell {
     border-left: 0px;
