@@ -80,8 +80,6 @@ $(document).ready(()=> {
             right: 'next'
         }
     })
-    // set today date and workout in event well on page load    
-    
      
     // CHANGE DATE FORMAT FROM SINGLE DIGIT TO DOUBLE DIGIT DAYS AND MONTHS
     function getMoment(time) {
